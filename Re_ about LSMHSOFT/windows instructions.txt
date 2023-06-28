@@ -1,0 +1,10 @@
+Primero hay que situarse en la carpeta donde se encuentran los archivos fuente y de datos. Abrir cmd desde ahí.
+
+-Para compilar el códigoo en Windows:
+(Asumiendo que tiene instalado el compilador MinGW con g++ y el ejecutable está en C:\MinGW\bin\g++.exe)
+
+	C:\\MinGW\\bin\\g++.exe .\\LSMHSOFT.cpp .\\matris.cpp .\\levelell.cpp -o LSMHSOFT.exe
+
+-Para correr el executable con los archivos que vienen de ejemplo y poner el resultado en un archivo llamado "test.txt":
+
+	.\LSMHSOFT.exe -G.\\ITU_GGC16.gfc -D.\\disturbance.xyz -E.\\elevation.xyz -R"45.01/47/1.01/5" -I"0.02/0.02" > test.txt
