@@ -96,7 +96,6 @@ namespace LSMHSOFT___Desktop
             label4.Size = new System.Drawing.Size(59, 17);
             label4.TabIndex = 20;
             label4.Text = "Density:";
-            label4.Click += new System.EventHandler(this.label4_Click);
             // 
             // ModelFileButton
             // 
@@ -139,7 +138,6 @@ namespace LSMHSOFT___Desktop
             this.TitleLabel.Size = new System.Drawing.Size(286, 31);
             this.TitleLabel.TabIndex = 1;
             this.TitleLabel.Text = "LSMHSOFT - Desktop";
-            this.TitleLabel.Click += new System.EventHandler(this.TitleLabel_Click);
             // 
             // button1
             // 
@@ -177,7 +175,6 @@ namespace LSMHSOFT___Desktop
             this.label1.Size = new System.Drawing.Size(188, 25);
             this.label1.TabIndex = 4;
             this.label1.Text = "Optional arguments:";
-            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // OpenDensityButton
             // 
@@ -201,7 +198,6 @@ namespace LSMHSOFT___Desktop
             this.MTextBox.Text = "195";
             this.toolTip1.SetToolTip(this.MTextBox, "Maximum expansion of the GGM used in the computation.\r\ndefault: 195");
             this.MTextBox.TextChanged += new System.EventHandler(this.MTextBox_TextChanged);
-            this.MTextBox.MouseEnter += new System.EventHandler(this.MTextBox_MouseHover);
             // 
             // PTextBox
             // 
@@ -274,7 +270,6 @@ namespace LSMHSOFT___Desktop
             this.ModelLabel.Size = new System.Drawing.Size(50, 17);
             this.ModelLabel.TabIndex = 13;
             this.ModelLabel.Text = "Model:";
-            this.ModelLabel.Click += new System.EventHandler(this.ModelLabel_Click);
             // 
             // label2
             // 
@@ -284,7 +279,6 @@ namespace LSMHSOFT___Desktop
             this.label2.Size = new System.Drawing.Size(95, 17);
             this.label2.TabIndex = 14;
             this.label2.Text = "Disturbances:";
-            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // label3
             // 
@@ -294,7 +288,6 @@ namespace LSMHSOFT___Desktop
             this.label3.Size = new System.Drawing.Size(70, 17);
             this.label3.TabIndex = 15;
             this.label3.Text = "Elevation:";
-            this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // ModelFileLabel
             // 
@@ -379,7 +372,6 @@ namespace LSMHSOFT___Desktop
             this.MLabel.Size = new System.Drawing.Size(39, 20);
             this.MLabel.TabIndex = 21;
             this.MLabel.Text = "-M :";
-            this.MLabel.Click += new System.EventHandler(this.MLabel_Click);
             // 
             // PLabel
             // 
@@ -390,7 +382,6 @@ namespace LSMHSOFT___Desktop
             this.PLabel.Size = new System.Drawing.Size(36, 20);
             this.PLabel.TabIndex = 22;
             this.PLabel.Text = "-P :";
-            this.PLabel.Click += new System.EventHandler(this.PLabel_Click);
             // 
             // CLabel
             // 
@@ -401,7 +392,6 @@ namespace LSMHSOFT___Desktop
             this.CLabel.Size = new System.Drawing.Size(37, 20);
             this.CLabel.TabIndex = 23;
             this.CLabel.Text = "-C :";
-            this.CLabel.Click += new System.EventHandler(this.CLabel_Click);
             // 
             // VLabel
             // 
@@ -412,7 +402,6 @@ namespace LSMHSOFT___Desktop
             this.VLabel.Size = new System.Drawing.Size(36, 20);
             this.VLabel.TabIndex = 24;
             this.VLabel.Text = "-V :";
-            this.VLabel.Click += new System.EventHandler(this.VLabel_Click);
             // 
             // RLabel
             // 
@@ -423,7 +412,6 @@ namespace LSMHSOFT___Desktop
             this.RLabel.Size = new System.Drawing.Size(37, 20);
             this.RLabel.TabIndex = 25;
             this.RLabel.Text = "-R :";
-            this.RLabel.Click += new System.EventHandler(this.RLabel_Click);
             // 
             // ILabel
             // 
@@ -434,7 +422,6 @@ namespace LSMHSOFT___Desktop
             this.ILabel.Size = new System.Drawing.Size(29, 20);
             this.ILabel.TabIndex = 26;
             this.ILabel.Text = "-I :";
-            this.ILabel.Click += new System.EventHandler(this.ILabel_Click);
             // 
             // backgroundWorker1
             // 
@@ -496,7 +483,6 @@ namespace LSMHSOFT___Desktop
             this.Controls.Add(this.ModelFileButton);
             this.Name = "LSMHSOFT";
             this.Text = "LSMHSOFT - Desktop";
-            this.Load += new System.EventHandler(this.LSMHSOFT_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

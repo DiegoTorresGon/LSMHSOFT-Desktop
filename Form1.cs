@@ -71,68 +71,9 @@ namespace LSMHSOFT___Desktop
             }
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void MTextBox_TextChanged(object sender, EventArgs e)
         {
             args.m = MTextBox.Text;
-        }
-
-        private void MTextBox_MouseHover(object sender, EventArgs e)
-        {
-        }
-
-        private void VLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void LSMHSOFT_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void TitleLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void ModelLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void MLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void PLabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void CLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void CTextBox_TextChanged(object sender, EventArgs e)
@@ -140,19 +81,9 @@ namespace LSMHSOFT___Desktop
             args.c = CTextBox.Text;
         }
 
-        private void ILabel_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void ITextBox_TextChanged(object sender, EventArgs e)
         {
             args.i = ITextBox.Text;
-        }
-
-        private void RLabel_Click(object sender, EventArgs e)
-        {
-
         }
 
         private void RTextBox_TextChanged(object sender, EventArgs e)
