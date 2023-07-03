@@ -1,6 +1,25 @@
 ﻿
+using System;
+using System.ComponentModel;
+
 namespace LSMHSOFT___Desktop
 {
+    public struct Arguments
+    {
+        public string model;
+        public string disturb;
+        public string elev;
+        public string density;
+        public string m;
+        public string p;
+        public string c;
+        public string v;
+        public string r;
+        public string i;
+        public string dataOutputBuffer;
+        public int nLinesBuffer;
+        public bool outputStarting;
+    }
     partial class LSMHSOFT
     {
         /// <summary>
@@ -40,11 +59,11 @@ namespace LSMHSOFT___Desktop
             this.label1 = new System.Windows.Forms.Label();
             this.OpenDensityButton = new System.Windows.Forms.Button();
             this.MTextBox = new System.Windows.Forms.TextBox();
-            this.IntDataCapVal = new System.Windows.Forms.TextBox();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
-            this.textBox5 = new System.Windows.Forms.TextBox();
-            this.textBox6 = new System.Windows.Forms.TextBox();
+            this.PTextBox = new System.Windows.Forms.TextBox();
+            this.CTextBox = new System.Windows.Forms.TextBox();
+            this.VTextBox = new System.Windows.Forms.TextBox();
+            this.RTextBox = new System.Windows.Forms.TextBox();
+            this.ITextBox = new System.Windows.Forms.TextBox();
             this.RunButton = new System.Windows.Forms.Button();
             this.ModelLabel = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -63,6 +82,9 @@ namespace LSMHSOFT___Desktop
             this.VLabel = new System.Windows.Forms.Label();
             this.RLabel = new System.Windows.Forms.Label();
             this.ILabel = new System.Windows.Forms.Label();
+            this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
+            this.SaveButton = new System.Windows.Forms.Button();
+            this.SaveOutput = new System.Windows.Forms.SaveFileDialog();
             label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
@@ -96,14 +118,17 @@ namespace LSMHSOFT___Desktop
             // 
             // DataOutput
             // 
+            this.DataOutput.AcceptsReturn = true;
+            this.DataOutput.AcceptsTab = true;
             this.DataOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DataOutput.Location = new System.Drawing.Point(285, 89);
+            this.DataOutput.MaxLength = 10000000;
             this.DataOutput.Multiline = true;
             this.DataOutput.Name = "DataOutput";
             this.DataOutput.ReadOnly = true;
-            this.DataOutput.Size = new System.Drawing.Size(420, 440);
+            this.DataOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DataOutput.Size = new System.Drawing.Size(376, 440);
             this.DataOutput.TabIndex = 0;
-            this.DataOutput.TextChanged += new System.EventHandler(this.DataOutput_TextChanged);
             // 
             // TitleLabel
             // 
@@ -175,65 +200,65 @@ namespace LSMHSOFT___Desktop
             this.MTextBox.TabIndex = 6;
             this.MTextBox.Text = "195";
             this.toolTip1.SetToolTip(this.MTextBox, "Maximum expansion of the GGM used in the computation.\r\ndefault: 195");
-            this.MTextBox.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            this.MTextBox.MouseEnter += new System.EventHandler(this.textBox1_MouseHover);
+            this.MTextBox.TextChanged += new System.EventHandler(this.MTextBox_TextChanged);
+            this.MTextBox.MouseEnter += new System.EventHandler(this.MTextBox_MouseHover);
             // 
-            // IntDataCapVal
+            // PTextBox
             // 
-            this.IntDataCapVal.Location = new System.Drawing.Point(61, 595);
-            this.IntDataCapVal.Name = "IntDataCapVal";
-            this.IntDataCapVal.Size = new System.Drawing.Size(136, 22);
-            this.IntDataCapVal.TabIndex = 7;
-            this.IntDataCapVal.Text = "0.5";
-            this.toolTip1.SetToolTip(this.IntDataCapVal, "Integration cap size (unit: degree).\r\ndefault: 0.5");
-            this.IntDataCapVal.TextChanged += new System.EventHandler(this.IntDataCapVal_TextChanged);
+            this.PTextBox.Location = new System.Drawing.Point(61, 595);
+            this.PTextBox.Name = "PTextBox";
+            this.PTextBox.Size = new System.Drawing.Size(136, 22);
+            this.PTextBox.TabIndex = 7;
+            this.PTextBox.Text = "0.5";
+            this.toolTip1.SetToolTip(this.PTextBox, "Integration cap size (unit: degree).\r\ndefault: 0.5");
+            this.PTextBox.TextChanged += new System.EventHandler(this.PTextBox_TextChanged);
             // 
-            // textBox3
+            // CTextBox
             // 
-            this.textBox3.Location = new System.Drawing.Point(61, 637);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(136, 22);
-            this.textBox3.TabIndex = 8;
-            this.textBox3.Text = "1.0";
-            this.toolTip1.SetToolTip(this.textBox3, "Variance of terrestrial gravity data (unit: mGal^2).\r\ndefault: 1.0");
-            this.textBox3.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.CTextBox.Location = new System.Drawing.Point(61, 637);
+            this.CTextBox.Name = "CTextBox";
+            this.CTextBox.Size = new System.Drawing.Size(136, 22);
+            this.CTextBox.TabIndex = 8;
+            this.CTextBox.Text = "1.0";
+            this.toolTip1.SetToolTip(this.CTextBox, "Variance of terrestrial gravity data (unit: mGal^2).\r\ndefault: 1.0");
+            this.CTextBox.TextChanged += new System.EventHandler(this.CTextBox_TextChanged);
             // 
-            // textBox4
+            // VTextBox
             // 
-            this.textBox4.Location = new System.Drawing.Point(308, 550);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(136, 22);
-            this.textBox4.TabIndex = 9;
-            this.textBox4.Text = "1";
-            this.toolTip1.SetToolTip(this.textBox4, "Version of the LSMH method (biased=1, unbiased=2, optimum=3).\r\ndefault: 1");
-            this.textBox4.TextChanged += new System.EventHandler(this.textBox4_TextChanged);
+            this.VTextBox.Location = new System.Drawing.Point(308, 550);
+            this.VTextBox.Name = "VTextBox";
+            this.VTextBox.Size = new System.Drawing.Size(136, 22);
+            this.VTextBox.TabIndex = 9;
+            this.VTextBox.Text = "1";
+            this.toolTip1.SetToolTip(this.VTextBox, "Version of the LSMH method (biased=1, unbiased=2, optimum=3).\r\ndefault: 1");
+            this.VTextBox.TextChanged += new System.EventHandler(this.VTextBox_TextChanged);
             // 
-            // textBox5
+            // RTextBox
             // 
-            this.textBox5.Location = new System.Drawing.Point(308, 595);
-            this.textBox5.Name = "textBox5";
-            this.textBox5.Size = new System.Drawing.Size(136, 22);
-            this.textBox5.TabIndex = 10;
-            this.textBox5.Text = "45.01/46.99/1.01/4.99";
-            this.toolTip1.SetToolTip(this.textBox5, "Limits of the target area (MinLat/MaxLat/MinLon/MaxLon).\r\ndefault: 45.01/46.99/1." +
+            this.RTextBox.Location = new System.Drawing.Point(308, 595);
+            this.RTextBox.Name = "RTextBox";
+            this.RTextBox.Size = new System.Drawing.Size(136, 22);
+            this.RTextBox.TabIndex = 10;
+            this.RTextBox.Text = "45.01/46.99/1.01/4.99";
+            this.toolTip1.SetToolTip(this.RTextBox, "Limits of the target area (MinLat/MaxLat/MinLon/MaxLon).\r\ndefault: 45.01/46.99/1." +
         "01/4.99 (2x4 degrees)");
-            this.textBox5.TextChanged += new System.EventHandler(this.textBox5_TextChanged);
+            this.RTextBox.TextChanged += new System.EventHandler(this.RTextBox_TextChanged);
             // 
-            // textBox6
+            // ITextBox
             // 
-            this.textBox6.Location = new System.Drawing.Point(308, 637);
-            this.textBox6.Name = "textBox6";
-            this.textBox6.Size = new System.Drawing.Size(136, 22);
-            this.textBox6.TabIndex = 11;
-            this.textBox6.Text = "0.02/0.02";
-            this.toolTip1.SetToolTip(this.textBox6, "Intervals of the grid (LatInterval/LonInterval).\r\ndefault: 0.02/0.02 (72x72 arc-s" +
+            this.ITextBox.Location = new System.Drawing.Point(308, 637);
+            this.ITextBox.Name = "ITextBox";
+            this.ITextBox.Size = new System.Drawing.Size(136, 22);
+            this.ITextBox.TabIndex = 11;
+            this.ITextBox.Text = "0.02/0.02";
+            this.toolTip1.SetToolTip(this.ITextBox, "Intervals of the grid (LatInterval/LonInterval).\r\ndefault: 0.02/0.02 (72x72 arc-s" +
         "econds)");
-            this.textBox6.TextChanged += new System.EventHandler(this.textBox6_TextChanged);
+            this.ITextBox.TextChanged += new System.EventHandler(this.ITextBox_TextChanged);
             // 
             // RunButton
             // 
             this.RunButton.AutoSize = true;
-            this.RunButton.Location = new System.Drawing.Point(516, 582);
+            this.RunButton.Location = new System.Drawing.Point(508, 624);
             this.RunButton.Name = "RunButton";
             this.RunButton.Size = new System.Drawing.Size(120, 49);
             this.RunButton.TabIndex = 12;
@@ -411,12 +436,36 @@ namespace LSMHSOFT___Desktop
             this.ILabel.Text = "-I :";
             this.ILabel.Click += new System.EventHandler(this.ILabel_Click);
             // 
+            // backgroundWorker1
+            // 
+            this.backgroundWorker1.WorkerReportsProgress = true;
+            this.backgroundWorker1.DoWork += new System.ComponentModel.DoWorkEventHandler(this.backgroundWorker1_DoWork);
+            this.backgroundWorker1.ProgressChanged += new System.ComponentModel.ProgressChangedEventHandler(this.backgroundWorker1_ProgressChanged);
+            this.backgroundWorker1.RunWorkerCompleted += new System.ComponentModel.RunWorkerCompletedEventHandler(this.backgroundWorker1_Completed);
+            // 
+            // SaveButton
+            // 
+            this.SaveButton.Enabled = false;
+            this.SaveButton.Location = new System.Drawing.Point(508, 552);
+            this.SaveButton.Name = "SaveButton";
+            this.SaveButton.Size = new System.Drawing.Size(119, 49);
+            this.SaveButton.TabIndex = 27;
+            this.SaveButton.Text = "Save result";
+            this.SaveButton.UseVisualStyleBackColor = true;
+            this.SaveButton.Click += new System.EventHandler(this.SaveButton_Click);
+            // 
+            // SaveOutput
+            // 
+            this.SaveOutput.Filter = "XYZ files (.xyz)|*.xyz|All files|*.*";
+            this.SaveOutput.Title = "Save output file";
+            // 
             // LSMHSOFT
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSize = true;
-            this.ClientSize = new System.Drawing.Size(751, 688);
+            this.ClientSize = new System.Drawing.Size(686, 688);
+            this.Controls.Add(this.SaveButton);
             this.Controls.Add(this.ILabel);
             this.Controls.Add(this.RLabel);
             this.Controls.Add(this.VLabel);
@@ -432,11 +481,11 @@ namespace LSMHSOFT___Desktop
             this.Controls.Add(this.label2);
             this.Controls.Add(this.ModelLabel);
             this.Controls.Add(this.RunButton);
-            this.Controls.Add(this.textBox6);
-            this.Controls.Add(this.textBox5);
-            this.Controls.Add(this.textBox4);
-            this.Controls.Add(this.textBox3);
-            this.Controls.Add(this.IntDataCapVal);
+            this.Controls.Add(this.ITextBox);
+            this.Controls.Add(this.RTextBox);
+            this.Controls.Add(this.VTextBox);
+            this.Controls.Add(this.CTextBox);
+            this.Controls.Add(this.PTextBox);
             this.Controls.Add(this.MTextBox);
             this.Controls.Add(this.OpenDensityButton);
             this.Controls.Add(this.label1);
@@ -463,11 +512,11 @@ namespace LSMHSOFT___Desktop
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox MTextBox;
-        private System.Windows.Forms.TextBox IntDataCapVal;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
-        private System.Windows.Forms.TextBox textBox5;
-        private System.Windows.Forms.TextBox textBox6;
+        private System.Windows.Forms.TextBox PTextBox;
+        private System.Windows.Forms.TextBox CTextBox;
+        private System.Windows.Forms.TextBox VTextBox;
+        private System.Windows.Forms.TextBox RTextBox;
+        private System.Windows.Forms.TextBox ITextBox;
         private System.Windows.Forms.Button RunButton;
         private System.Windows.Forms.Label ModelLabel;
         private System.Windows.Forms.Label label2;
@@ -487,6 +536,10 @@ namespace LSMHSOFT___Desktop
         private System.Windows.Forms.Label VLabel;
         private System.Windows.Forms.Label RLabel;
         private System.Windows.Forms.Label ILabel;
+        Arguments args;
+        private System.ComponentModel.BackgroundWorker backgroundWorker1;
+        private System.Windows.Forms.Button SaveButton;
+        private System.Windows.Forms.SaveFileDialog SaveOutput;
     }
 }
 
