@@ -121,13 +121,14 @@ namespace LSMHSOFT___Desktop
             this.DataOutput.AcceptsTab = true;
             this.DataOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DataOutput.Location = new System.Drawing.Point(285, 89);
-            this.DataOutput.MaxLength = 10000000;
+            this.DataOutput.MaxLength = 2147483647;
             this.DataOutput.Multiline = true;
             this.DataOutput.Name = "DataOutput";
             this.DataOutput.ReadOnly = true;
             this.DataOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.DataOutput.Size = new System.Drawing.Size(376, 440);
             this.DataOutput.TabIndex = 0;
+            this.DataOutput.TextChanged += new System.EventHandler(this.DataOutput_TextChanged);
             // 
             // TitleLabel
             // 
@@ -490,6 +491,8 @@ namespace LSMHSOFT___Desktop
 
         #endregion
 
+        private String textDataOutput = "";
+        private System.IO.FileStream tempFile;
         private System.Windows.Forms.Button ModelFileButton;
         private System.Windows.Forms.OpenFileDialog OpenModelFile;
         private System.Windows.Forms.TextBox DataOutput;

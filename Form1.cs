@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.IO;
 
 namespace LSMHSOFT___Desktop
 {
@@ -166,6 +167,7 @@ namespace LSMHSOFT___Desktop
             calculation.StartInfo.UseShellExecute = false;
             calculation.StartInfo.RedirectStandardOutput = true;
             calculation.OutputDataReceived += CalculationOutputHandler;
+            tempFile = System.IO.File.Open("temp.XYZ", FileMode.Create);
 
             if (args.density == null)
             {
@@ -188,19 +190,25 @@ namespace LSMHSOFT___Desktop
         private void backgroundWorker1_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             DataOutput.AppendText(e.UserState.ToString());
+            byte[] data = new UTF8Encoding(true).GetBytes(e.UserState.ToString());
+            tempFile.Write(data, 0, data.Length);
         }
         private void backgroundWorker1_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
             if (args.outputStarting)
             {
                 DataOutput.Text = "";
+                textDataOutput = "";
                 args.outputStarting = false;
             }
             if (args.nLinesBuffer > 0)
             {
                 DataOutput.AppendText(args.dataOutputBuffer);
+                byte[] data = new UTF8Encoding(true).GetBytes(args.dataOutputBuffer);
+                tempFile.Write(data, 0, data.Length);
                 args.dataOutputBuffer = "";
                 args.nLinesBuffer = 0;
+                tempFile.Close();
             }
             //display button to see if the users wants to save file.
             SaveButton.Enabled = true;
@@ -211,14 +219,13 @@ namespace LSMHSOFT___Desktop
             SaveOutput.ShowDialog();
             if (SaveOutput.FileName != "")
             {
-                System.IO.FileStream fs =
-                    (System.IO.FileStream)SaveOutput.OpenFile();
-
-                byte[] data = new UTF8Encoding(true).GetBytes(DataOutput.Text);
-                fs.Write(data, 0, data.Length);
-
-                fs.Close();
+                File.Copy(tempFile.Name, SaveOutput.FileName, true);
             }
+        }
+
+        private void DataOutput_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
