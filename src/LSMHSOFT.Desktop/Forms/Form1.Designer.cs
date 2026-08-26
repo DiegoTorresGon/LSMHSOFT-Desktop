@@ -52,7 +52,7 @@ namespace LSMHSOFT___Desktop
             System.Windows.Forms.Label label4;
             this.ModelFileButton = new System.Windows.Forms.Button();
             this.OpenModelFile = new System.Windows.Forms.OpenFileDialog();
-            this.DataOutput = new System.Windows.Forms.TextBox();
+            this.DataOutput = new System.Windows.Forms.RichTextBox();
             this.TitleLabel = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
@@ -117,15 +117,12 @@ namespace LSMHSOFT___Desktop
             // 
             // DataOutput
             // 
-            this.DataOutput.AcceptsReturn = true;
-            this.DataOutput.AcceptsTab = true;
             this.DataOutput.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.DataOutput.Location = new System.Drawing.Point(285, 89);
             this.DataOutput.MaxLength = 2147483647;
-            this.DataOutput.Multiline = true;
             this.DataOutput.Name = "DataOutput";
             this.DataOutput.ReadOnly = true;
-            this.DataOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.DataOutput.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.Vertical;
             this.DataOutput.Size = new System.Drawing.Size(376, 440);
             this.DataOutput.TabIndex = 0;
             this.DataOutput.TextChanged += new System.EventHandler(this.DataOutput_TextChanged);
@@ -495,7 +492,7 @@ namespace LSMHSOFT___Desktop
         private System.IO.FileStream tempFile;
         private System.Windows.Forms.Button ModelFileButton;
         private System.Windows.Forms.OpenFileDialog OpenModelFile;
-        private System.Windows.Forms.TextBox DataOutput;
+        private System.Windows.Forms.RichTextBox DataOutput;
         private System.Windows.Forms.Label TitleLabel;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button button2;

@@ -195,22 +195,35 @@ namespace LSMHSOFT___Desktop
         }
         private void backgroundWorker1_Completed(object sender, RunWorkerCompletedEventArgs e)
         {
-            if (args.outputStarting)
-            {
-                DataOutput.Text = "";
-                textDataOutput = "";
-                args.outputStarting = false;
-            }
+            // Finalize any remaining buffered data and close temp file
             if (args.nLinesBuffer > 0)
             {
-                DataOutput.AppendText(args.dataOutputBuffer);
                 byte[] data = new UTF8Encoding(true).GetBytes(args.dataOutputBuffer);
                 tempFile.Write(data, 0, data.Length);
                 args.dataOutputBuffer = "";
                 args.nLinesBuffer = 0;
+            }
+            try
+            {
                 tempFile.Close();
             }
-            //display button to see if the users wants to save file.
+            catch { }
+
+            // Load the full temp file into the RichTextBox at the end to avoid incremental truncation
+            try
+            {
+                DataOutput.Clear();
+                DataOutput.LoadFile(tempFile.Name, System.Windows.Forms.RichTextBoxStreamType.PlainText);
+                DataOutput.SelectionStart = DataOutput.TextLength;
+                DataOutput.ScrollToCaret();
+            }
+            catch (Exception ex)
+            {
+                // If LoadFile fails, append a fallback message and keep whatever was displayed
+                DataOutput.AppendText(Environment.NewLine + "[Could not load full output: " + ex.Message + "]");
+            }
+
+            // display button to see if the users wants to save file.
             SaveButton.Enabled = true;
         }
 
